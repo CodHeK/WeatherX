@@ -6,6 +6,10 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Jim+Nightshade|Macondo|Nova+Oval" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="weather.js"></script>
 	<style type="text/css">
 		body {
 			font-family: Macondo;
@@ -32,6 +36,26 @@
                  -moz-animation: bounce 2s infinite;
                  -o-animation: bounce 2s infinite;
         }
+
+        #weather_content {
+        	text-align: center;
+        }
+
+        #country {
+        	font-size: 55px;
+        }
+
+        #desp {
+        	font-size: 45px;
+        }
+
+        #temp {
+        	font-size: 45px;
+        }
+
+        #other {
+        	font-size: 30px;
+        }
  
 		@-webkit-keyframes bounce {
  				0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);} 
@@ -55,7 +79,59 @@
  				40% {transform: translateY(-30px);}
  				60% {transform: translateY(-15px);}
 		}
+
+		.col-lg-4.col-md-4.col-sm-12.col-xs-12 {
+			border: 2px solid black;
+			background-color: #F5F5F5;
+			margin: 0.33%;
+			width: 32%;
+			height: 400px;
+		}
+
+		.col-lg-4.col-md-4.col-sm-12.col-xs-12.header {
+			text-transform: uppercase;
+			font-size: 30px;
+			color: black;
+			border-right: 2px solid black;
+		}
+
+		.sep-bar { 
+    border-top: 1px solid #BDBDBE;
+    color: #4C4C4C;
+    font-family: 'Dosis', serif;
+    font-style: bold;
+    font-weight: 700;
+    font-size: 13px;
+    margin: 20px 0 6px;
+    text-align: center;
+    overflow: visible; 
+    width:80%;
+    margin-left:10%;
+}
+
+.sep-bar span { 
+	background-color: white;
+    padding: 0 10px;
+    position: relative;
+    top: -8px; 
+}
+
+#val_h,
+#val_w,
+#val_mt,
+#val_mit,
+#val_d  {
+	padding-top: 30px;
+	font-size: 40px;
+}
+
+#val_p {
+	padding-top: 40px;
+	font-size: 40px;
+}
+
 	</style>
+}
 </head>
 <body>
 	<nav class="navbar navbar-inverse">
@@ -90,14 +166,70 @@
 <div class="container">
 	<div id="content">
 		<h2 class="bounce"><i class="fa fa-bolt" aria-hidden="true" style="font-size: 6em"></i></h2>
-		<h4 style="font-size: 20px;">" Current weather data for any location on Earth including over 200,000 cities! "</h4>
+		<h4 style="font-size: 25px;">" Current weather data for any location on Earth including over 200,000 cities! "</h4>
 		<div class="form-group">
-			<input type="text" placeholder="City name" class="form-control" style="height: 40px;width:400px;margin-left: 30%;"><button type="submit" class="btn btn-default btn-lg" id="search">Search</button>
+			<input type="text" placeholder="City name" class="form-control" id="inp_city" style="height: 40px;width:400px;margin-left: 30%;">
+			<button type="submit" class="btn btn-default btn-lg" id="search"><a href="#weather_content" style="text-decoration:none;color:black;" id="click">Search</a></button>
 		</div>
 	</div>
 </div>
-
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div id="weather_content">
+	<h2><span id="country">Japan</span></h2><br><br>
+	<h1 id="temp"><div id="val" style="font-size:70px;font-weight:700;">21</div></h1>
+	<h2><span id="desp">Clear Sky</span></h2>
+	<br><br>
+	<h3 id="other">Other Parameters: </h3><br><br>
+	<div class="container">
+	<div class="row">
+		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" id="humidity">
+			<h4 class="header" style="font-size:30px;">HUMIDITY</h4>
+			<div class="sep-bar" style="font-family:Macondo;"><span> X </span></div><br>
+			<img class="icon icons8-Wet" src="data:image/png;base64,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" width="95" height="95">
+			<h3 id="val_h"></h3>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" id="humidity">
+			<h4 class="header" style="font-size:30px;">PRESSURE</h4>
+			<div class="sep-bar" style="font-family:Macondo;"><span> X </span></div><br>
+			<img class="icon icons8-Pressure-Filled" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAC1ElEQVRoQ+2Zj7FNMRDGv9cBHeiAVwEqQAWoABWgAlSAClABKnhUQAeogPnNnJi8OyfJZnfzmDtvZ+6cc+8km/32z7dJ7omORE6OBIeygVyRdEfSXUm887mxOeuLpJ/b572kD9t7ii+zgGD4I0m3Jq0C0FtJPEMSBYLhTx0ADo3+JOm5JJ4uiQB5Iemxa9X2pJeSnnh0eoCQ9+8SotCylzR7OFs/s0AA8bEqYI/zLHMghtszYGaBAGK2oC2G740hMvesk2eAkL8w00XKK2sdWoEQBaKxSn5JIp1u7ixAig3ZzApkZUp9lUS0YUFqcI+aAdMVCxCaHSy1QkidZwYCoVa6TdMCBAVsOzKFVHqwGfd6e+/pZzuDQ5syAkKof2QikEQqYdT37WmN9tUeHY+A4DU8liU1C12TdNaoi731aJJvWoaMgGSlVZ1KxRZAlJ2xxVHd9BoBgfb2KNGyMMZTyDiDNKrF05M+95rxCMis12pj2fxh8KF4WZA+c+pNrd8W1zfGtIoT8tjrF5almo4fRSQbCAX+zWJxY4wbCOG87lyYgxI1UgvfOYh5BNpuksMoIpFix1gOXrANcn8H2AygULFn0e+Mwa2xIfrNbogRQKGGuGKL4gUT2qKw6P+QXuFNI0C8Dczr+b15Kdt4FEfZKwKqy1ZF8Yh+y7jVR90e0NSjLgt5NnqRSDA3/fKhGHSRKTYs8NpL1tQqc6BjwHi3LdYIsR0hnbm9N8ksEJQCBkr2nlNGhhEJGrEZBAo9QIohK2rGXBOH3ogAQRfhZ0cbjQ4Ui57hRVwrnFEgRS9Nk3SYvTYijYisG8BsHxnldU0GgKr/eivEQAHXf71RZ1N10DMiKyJWoMvGrQRC3ZD7tez9lgJuJZDWeX/JmkuUbi7+p0Ai91gpKTKh5Nw912FEItc/EzakDf1r/yWQNJ/GFF1GJOa//NnHH5HIXW++v/saz90F/wHWfoMzuALKTwAAAABJRU5ErkJggg==" width="64" height="64">
+			<h3 id="val_p"></h3>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" id="maxt">
+			<h4 class="header" style="font-size:30px;">MAX.TEMP</h4>
+			<div class="sep-bar" style="font-family:Macondo;"><span> X </span></div><br>
+			<i class="fa fa-thermometer-empty" aria-hidden="true" style="font-size:80px;padding-left:30px;color:black;"><sub style="font-size:10px;font-family:Macondo;font-weight:700;">MAX</sub></i>
+			<h3 id="val_mt"></h3>
+		</div>
+	</div><br>
+	<div class="row">
+		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" id="mint">
+			<h4 class="header" style="font-size:30px;">MIN.TEMP</h4>
+			<div class="sep-bar" style="font-family:Macondo;"><span> X </span></div><br>
+			<i class="fa fa-thermometer-empty" aria-hidden="true" style="font-size:80px;padding-left:30px;color:black;"><sub style="font-size:10px;font-family:Macondo;font-weight:700;">MIN</sub></i>
+			<h3 id="val_mit"></h3>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" id="wind">
+			<h4 class="header" style="font-size:30px;">WIND</h4>
+			<div class="sep-bar" style="font-family:Macondo;"><span> X </span></div><br>
+			<img class="icon icons8-Atmospheric-Pressure-Filled" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAACQUlEQVRoQ+1ai03DMBB9nQCYADYAJgAmgBHaCYAJgA1gAhiBDYAJgAloN4AJQE+yUQiN79zcU5uqlqwo6ot9786+nzoCcAzgHsAehjmmACYjAB8DJpFVPyWR72Ea4q/Uq0yEslnj1wgbIpaqxL9naw3CIiVd9Cbyktw1XfaToXUVlttuiGTlq7Rcs+6gLdLlihe+7DcArtO8Mu5IJHZtiLR11vuyR2q5KVzNuiF35BLAbZrnxtFSYUOInAB4TvPIIKLChhA5BPDmJKLChhD5d8kKVonEhnqtHLQOALw605MobCiROwAXAMapNC5xUWHznr3cbz7zjwBODYuosL2JzFJdv51qfD67hgrb3G9hi0wAPDiPlQrbm0jWMBeyOi4qbEiKotKwtW5o80F13j3rhhKxtNY0uQo7z6lUX/YdAJ8pADK4lYYK25vIOwAKz54wL3lpqLBde1ZZRBWda9YNIZLPPOsPq/ZQYUOIqOqJmnXbKUmbmKv5kC+vFQS5uAobQiSyniimF4Yj6e211oJITedPhS0Zquh+v1J3hI23tnCMExz76anCek9ZkUj2JqwAOdlx56T75ZODjYddACpsCBEKSQGZkjCi851Rne+czRJXhbXihtv9NgVsfjSvTldhS17KTSQfn2wZvpeaDW0yUVjriLlzrSzgmaNjosIu7LXaH/IfBd5/Q6iw1p1xpSiWeZf5u/toLVNIz96DIhJas3u0o8KsDZEqBZE1o/ZW1VerB56RCPMotkOZQw1xsEc2/gG6iU9TXVxbUQAAAABJRU5ErkJggg==" width="64" height="64">
+			<h3 id="val_w"></h3>
+			</div>
+		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" id="param">
+			<h4 class="header" style="font-size:30px;">WIND DIRECTION</h4>
+			<div class="sep-bar" style="font-family:Macondo;"><span> X </span></div><br>
+			<img class="icon icons8-Wind-Rose-Filled" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAERElEQVRoQ92aj5FMQRDGv4sAESACRIAIEAEiQASIABEgAkSACNxFgAgQAfUr77vqazP7et7tqLqbqq273X0z3V/3139mZg80f3yR9FPS7ZmiDmYuLumWpI+LDIB8miVvNpCXkh4tyr+S9PisAvkq6cqi/DdJV88ikOuSiA/GL0kXJN2QdDgDzExqQaMXi9IfJN2R9EQSdNv7mAkEb+AVxkNJrxdv4JW9j1lAiAviw+OSpB/LG+KEeNnrmAUk0gqFkUPqvTmLXlUgF5c0+rZozfdLTNjqyDE44uVuwR14FeDIXB1VIM8kPV1WeyPp+Q5AgDaNIpBIN6hGtW8NnkPWg+XLUiGtAsmcRwmyD0UuK4QCBHYclkPqvbYEPwaJAwOQ5QyA70jbyO6BPp5fBcIEBN9Pwg0ID3m0nrMcV3roYoVNW6jH/3GwLmxYHSNAslfi4mQhBKIgtMoKWY6LJAYge9G+tACw9vfQFewVCIvF3qm1OApmEDwXDQboy6ua/a09mX7daSMeYRGURBHajZER5bSol9ca8ka2VFWxmMGqcyIQUu+7lYlD3tgKZItXsuehYM+rR6G1qRrqBHfLk5bAdl2pzMtAdtGrVDey0NEYifNb2akHKsrBo+wa3VDm7LdpzzICBAVoxdm+wvOYnShc9FKkaApez2C7QHgOtKPF4fW5UgwrMeJ+B8Vzf0RmQXkLdVbjswwGg1VAtDwaQXW75pZHcDnNGpU3u59A9MK9nR4KZzD0Vj06VWLMzyCT+MJTJ+QbCIrb6t5jezLdqi1f3UdkMAhtxcQIiPwsuhx7CyBxJ8fD8N0PAGC1Yeto0/LMaRTfNfcQIO5IZwmJtCC1nsYwJBuYQ8KJyebI1HIm4qFKHzQCmrhy8GO0ETDQPCof5ZJsjpnTC3aAEeytVDoKgrXiRmsNDLHEdoF5rWRDsEP5ZrD3lMMi9haWGRl4grlQ6XeamMFEq29KNqMFMVJwVwccQYAhA+EzwJB5Mt+dbJwpSzE1AiR7o9eiZBA9IC3vojQ1Z3hsBdLal8e6k7uAlkd6yg638Cy0BQhpj8O31k6QNVtWHQGy6bB7C5DKxurekhpt9REgzBk+Ix4FsuYNKx5PSUZixPN9OFEK9C3UWvOGrw8yPUY9gm7lo6BRILuOgwDACQtAvY2NdyEZiA/eOAri1UrlQ14ZoVZre2oAgDAN/Fy0aAaSD+gwgK/oYjYrX9dVgbS8gaIRgBVwaqbg+S4kA8nJgLnIAFA+zSxdQ1SBxNjAmrzv7U3iIbaVyEDWDrEjoFIGqwJBObgMbSqbK18rWIkIpHqtQOvCq+X1f4ppFchoy5DvQiKQTZV7TYFZQPJdSGzjS5xfUzx/PwuIu1v2MwS2j0g3nSJWQM0EYnqRHJyJSoFbUfx/eiTehbjBPJM/GMBo8S5k+KpgxDMzqYUe5+ZHNefmZ07OXvzd90njCeb9Aa6qBeFWJ+HRAAAAAElFTkSuQmCC" width="65" height="65">
+			<h3 id="val_d"></h3>
+		</div>
+	</div>
+	</div>
+	
+</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#click").click(function() {
+				$("#weather_content").fadeIn(3000);
+			});
+		});
+	</script>
 </body>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </html>
