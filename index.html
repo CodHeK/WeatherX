@@ -10,9 +10,19 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="weather.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#click").click(function() {
+				$("#weather_content").fadeIn(3000);
+			});
+		});
+	</script>
 	<style type="text/css">
 		body {
 			font-family: Macondo;
+			background-image: url("backg.png");
+			background-size: cover;
+			background-position: center;
 		}
 
 		#fork:hover {
@@ -131,7 +141,6 @@
 }
 
 	</style>
-}
 </head>
 <body>
 	<nav class="navbar navbar-inverse">
@@ -156,7 +165,7 @@
       
       <ul class="nav navbar-nav navbar-right">
         <ul class="nav navbar-nav">
-        <li class="active"><a href="#">ABOUT US<span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="about.html">ABOUT US<span class="sr-only">(current)</span></a></li>
       </ul>
        &nbsp&nbsp&nbsp<a href=""><i class="fa fa-github" aria-hidden="true" style="color: #DCDCDC;font-size: 20px;margin-top: 15px;"></i></a>
       </ul>
@@ -222,14 +231,10 @@
 		</div>
 	</div>
 	</div>
-	
+	<br>
+	<div id="footer">
+		<h4 style="font-size:17px;"><mark>©2017, WeatherX</mark></h4>
+	</div>
 </div>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#click").click(function() {
-				$("#weather_content").fadeIn(3000);
-			});
-		});
-	</script>
 </body>
 </html>
