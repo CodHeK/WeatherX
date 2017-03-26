@@ -7,3 +7,6 @@
 ### Also there are 2 modes, NORMAL, AVG MODE...
 
 #### NORMAL Mode just displays all the parameters and AVG Mode can be used to find the average temperatures of the cities you enter.
+
+### WEBSITE LINK :
+[weatherx.000webhostapp.com](weatherx.000webhostapp.com)
