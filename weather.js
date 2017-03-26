@@ -52,6 +52,8 @@ $(document).ready(function() {
 		}
 		else {
 			alert("*** FIELD ID LEFT EMPTY ***");
+			$("#norm").show();
+			$("#weather_content").hide();
 		}
 	});
 });
