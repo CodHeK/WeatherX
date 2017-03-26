@@ -1,42 +1,80 @@
-$(document).ready(function(){
+$(document).ready(function() {
 
-	$('#submitWeather').click(function(){ //id of button search
+	$("#search").click(function() {
 
-		var city = $("#city").val();  //id of input
-		if(city!=''){
+		var city = $("#inp_city").val();
+
+		if(city != '') {
 
 			$.ajax({
-				url: 'api.openweathermap.org/data/2.5/weather?q=' + city + "&units=metric" + "&APPID=b1884514adc3b3c175df2eff8f3f29e5",
+
+				url: 'http://api.openweathermap.org/data/2.5/weather?q=' + city + "&units=metric" + "&APPID=b1884514adc3b3c175df2eff8f3f29e5",
 				type: "GET",
 				dataType: "jsonp",
-				success: function(data){
-					var widget = show(data);
+				success: function(data) {
+					var wt = weather(data);
+					var t = temp(data);
+					var h = humidity(data);
+					var p = pressure(data);
+					var max = maxtemp(data);
+					var min = mintemp(data);
+					var w = wind(data);
+					var c = country(data);
+					var d = wind_direction(data);
 
-					$("#show").html(widget); //id where the data is to be displayed(given to the empty div)
-					$("#city").val('');
+					$("#desp").html(wt);
+					$("#val").html(t);
+					$("#val_h").html(h);
+					$("#val_p").html(p);
+					$("#val_mt").html(max);
+					$("#val_mit").html(min);
+					$("#val_w").html(w);
+					$("#country").html(c);
+					$("#val_d").html(d);
+
+					$("#inp_city").val('');
+
 				}
-
 			});
 		}
-		else
-		{
-			$("#error").html('Field cannot be empty!') //span inside div corresponding to the city name
+		else {
+			alert("Field Empty!");
 		}
 	});
 });
 
-function show(data)
-{
-	return 	"<h3 style='font-size: 45px; font-weight: bold;' class='text-center'>Current Weather for " + data.name + ", " + data.sys.country + "</h3>" +		
-			"<h3><strong>Weather</strong>: "+ data.weather[0].main()  +"</h3>" +
-		   	"<h3><strong>Description</strong>: "+ data.weather[0].description  +"</h3>" +
-		  	"<h3><strong>Temperature</strong>: "+ data.main.temp  +"&deg;C</h3>" +
-		  	"<h3><strong>Pressure</strong>: "+ data.main.pressure  +"hPa</h3>" +
-		  	"<h3><strong>Humidity</strong>: "+ data.main.humidity  +"%</h3>" +
-		  	"<h3><strong>Min. temperature</strong>: "+ data.main.temp_min +"&deg;C</h3>" +
-		  	"<h3><strong>Max. temperature</strong>: "+ data.main.temp_min +"&deg;C</h3>" +
-		  	"<h3><strong>Wind Speed</strong>: "+ data.wind.speed + "m/s</h3>" +
-		  	"<h3><strong>Wind Direction</strong>: "+ data.wind.deg + "&deg;C</h3>";
-
+function weather(data) {
+	return data.weather[0].description;
 }
+
+function temp(data) {
+	return data.main.temp + "&deg;C";
+}
+
+function humidity(data) {
+	return data.main.humidity + "%";
+}
+
+function pressure(data) {
+	return data.main.pressure + "hPa";
+}
+
+function maxtemp(data) {
+	return data.main.temp_max + "&deg;C";
+}
+
+function mintemp(data) {
+	return data.main.temp_min + "&deg;C";
+}
+
+function wind(data) {
+	return data.wind.speed + "m/s";
+}
+
+function country(data) {
+	return data.name;
+}
+
+function wind_direction(data) {
+	return data.wind.deg + "&deg;";
 }
