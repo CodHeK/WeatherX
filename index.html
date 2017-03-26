@@ -53,18 +53,22 @@
 
         #country {
         	font-size: 55px;
+        	color: black;
         }
 
         #desp {
         	font-size: 45px;
+        	color: black;
         }
 
         #temp {
         	font-size: 45px;
+        	color:black;
         }
 
         #other {
         	font-size: 30px;
+        	color:black;
         }
  
 		@-webkit-keyframes bounce {
@@ -133,11 +137,13 @@
 #val_d  {
 	padding-top: 30px;
 	font-size: 40px;
+	color:black;
 }
 
 #val_p {
 	padding-top: 40px;
 	font-size: 40px;
+	color:black;
 }
 
 	</style>
@@ -165,6 +171,8 @@
       
       <ul class="nav navbar-nav navbar-right">
         <ul class="nav navbar-nav">
+        <li class="active"><a href="#" id="nmode">NORM MODE<span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="#" id="avgt">AVG TEMP<span class="sr-only">(current)</span></a></li>
         <li class="active"><a href="about.html">ABOUT US<span class="sr-only">(current)</span></a></li>
       </ul>
        &nbsp&nbsp&nbsp<a href=""><i class="fa fa-github" aria-hidden="true" style="color: #DCDCDC;font-size: 20px;margin-top: 15px;"></i></a>
@@ -172,10 +180,20 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<div class="container">
+<div class="container" id="norm">
 	<div id="content">
 		<h2 class="bounce"><i class="fa fa-bolt" aria-hidden="true" style="font-size: 6em"></i></h2>
 		<h4 style="font-size: 25px;">" Current weather data for any location on Earth including over 200,000 cities! "</h4>
+		<div class="form-group">
+			<input type="text" placeholder="City name" class="form-control" id="inp_city" style="height: 40px;width:400px;margin-left: 30%;">
+			<button type="submit" class="btn btn-default btn-lg" id="search"><a href="#weather_content" style="text-decoration:none;color:black;" id="click">Search</a></button>
+		</div>
+	</div>
+</div>
+<div class="container" id="avg">
+	<div id="content">
+		<h2 class="bounce"><i class="fa fa-bolt" aria-hidden="true" style="font-size: 6em"></i></h2>
+		<h2>Enter the names of cities</h2>
 		<div class="form-group">
 			<input type="text" placeholder="City name" class="form-control" id="inp_city" style="height: 40px;width:400px;margin-left: 30%;">
 			<button type="submit" class="btn btn-default btn-lg" id="search"><a href="#weather_content" style="text-decoration:none;color:black;" id="click">Search</a></button>
