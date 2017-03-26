@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	$("#avg").hide();
+	$("#weather_content").hide();
 	$("#avgt").click(function() {
 		$("#norm").hide();
 		$("#avg").fadeToggle(1000);
@@ -9,10 +10,12 @@ $(document).ready(function() {
 		$("#avg").hide();
 		$("#norm").fadeToggle(1000);
 	});
-
+	
 	$("#click").click(function() {
 
 		var city = $("#inp_city").val();
+		$("#norm").hide();
+		$("#weather_content").fadeToggle(1000);
 
 		if(city != '') {
 
@@ -89,3 +92,6 @@ function wind_direction(data) {
 	return data.wind.deg + "&deg;";
 }
 
+function temper(data) {
+	return data.main.temp;
+}
