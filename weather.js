@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	$("#search").click(function() {
+	$("#click").click(function() {
 
 		var city = $("#inp_city").val();
 
