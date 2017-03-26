@@ -1,14 +1,25 @@
 $(document).ready(function() {
 	$("#avg").hide();
+	$("#rec").hide();
 	$("#weather_content").hide();
 	$("#avgt").click(function() {
 		$("#norm").hide();
+		$("#rec").hide();
 		$("#avg").fadeToggle(1000);
+
 	});
 
 	$("#nmode").click(function() {
 		$("#avg").hide();
+		$("#rec").hide();
 		$("#norm").fadeToggle(1000);
+	});
+
+	$("#recent").click(function() {
+		$("#avg").hide();
+		$("#norm").hide();
+		$("#weather_content").hide();
+		$("#rec").fadeToggle(1000);
 	});
 	
 	$("#click").click(function() {
@@ -16,7 +27,6 @@ $(document).ready(function() {
 		var city = $("#inp_city").val();
 		$("#norm").hide();
 		$("#weather_content").fadeToggle(1000);
-
 		if(city != '') {
 
 			$.ajax({
@@ -46,6 +56,14 @@ $(document).ready(function() {
 					$("#val_d").html(d);
 
 					$("#inp_city").val('');
+
+
+					$("#cty").append("<br>" + c);
+					$("#tmp").append("<br>" + t);
+					$("#mintp").append("<br>" + min);
+					$("#maxtp").append("<br>" + max);
+					$("#humid").append("<br>" + h);
+					$("#pres").append("<br>" + p);
 
 				}
 			});
