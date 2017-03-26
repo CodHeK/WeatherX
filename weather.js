@@ -1,4 +1,14 @@
 $(document).ready(function() {
+	$("#avg").hide();
+	$("#avgt").click(function() {
+		$("#norm").hide();
+		$("#avg").fadeToggle(1000);
+	});
+
+	$("#nmode").click(function() {
+		$("#avg").hide();
+		$("#norm").fadeToggle(1000);
+	});
 
 	$("#click").click(function() {
 
@@ -38,7 +48,7 @@ $(document).ready(function() {
 			});
 		}
 		else {
-			alert("Field Empty!");
+			alert("*** FIELD ID LEFT EMPTY ***");
 		}
 	});
 });
@@ -78,3 +88,4 @@ function country(data) {
 function wind_direction(data) {
 	return data.wind.deg + "&deg;";
 }
+
