@@ -5,6 +5,7 @@ $(document).ready(function() {
 	$("#avgt").click(function() {
 		$("#norm").hide();
 		$("#rec").hide();
+		$("#weather_content").hide();
 		$("#avg").fadeToggle(1000);
 
 	});
@@ -12,6 +13,7 @@ $(document).ready(function() {
 	$("#nmode").click(function() {
 		$("#avg").hide();
 		$("#rec").hide();
+		$("#weather_content").hide();
 		$("#norm").fadeToggle(1000);
 	});
 
