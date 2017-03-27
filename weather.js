@@ -58,11 +58,17 @@ $(document).ready(function() {
 					$("#inp_city").val('');
 
 
-					$("#cty").append("<br>" + c);
+					$("#cty").append("<br>");
+					$("#cty").append("<br>"+ c);
+					$("#tmp").append("<br>");
 					$("#tmp").append("<br>" + t);
+					$("#mintp").append("<br>");
 					$("#mintp").append("<br>" + min);
+					$("#maxtp").append("<br>");
 					$("#maxtp").append("<br>" + max);
+					$("#humid").append("<br>");
 					$("#humid").append("<br>" + h);
+					$("#pres").append("<br>");
 					$("#pres").append("<br>" + p);
 
 				}
