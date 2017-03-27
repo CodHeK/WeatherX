@@ -9,4 +9,4 @@
 #### NORMAL Mode just displays all the parameters and AVG Mode can be used to find the average temperatures of the cities you enter.
 
 ### WEBSITE LINK :
-[weatherx.000webhostapp.com](weatherx.000webhostapp.com)
+[weatherx.000webhostapp.com](weatherx.000webhostapp.com)  OR [wex.uphero.com](wex.uphero.com)
